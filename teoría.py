@@ -3,7 +3,7 @@ class Vehiculo():
         self.color = color
         self.ruedas = ruedas
     def __str__(self):
-        return "Color {}, {} ruedas".format( self.color, self.ruedas )
+        return f"Color: {self.color}, {self.ruedas} ruedas"
 
 class Coche(Vehiculo):
     def __init__(self, color, ruedas, velocidad, cilindrada):
@@ -12,8 +12,8 @@ class Coche(Vehiculo):
         self.cilindrada = cilindrada
 
     def __str__(self):
-       return "color {}, {} km/h, {} ruedas, {} cc".format(
-self.color, self.velocidad, self.ruedas, self.cilindrada )
+       return Vehiculo.__str__(self) + f", Velocidad:  {self.velocidad} km/h, cilindrada: {self.cilindrada} cc"
+
     
 class Bicicleta(Vehiculo):
     def __init__(self, color, ruedas, tipo):
@@ -21,9 +21,7 @@ class Bicicleta(Vehiculo):
         self.tipo=tipo
 
     def __str__(self):
-       return "color {}, {} ruedas, {} ".format(
-self.color, self.ruedas, self.tipo
-       )
+       return Vehiculo.__str__(self) + f", tipo: {self.tipo}"
 
 class Camioneta(Coche):
     def __init__(self, color, ruedas, velocidad, cilindrada, carga):
@@ -31,8 +29,7 @@ class Camioneta(Coche):
         self.carga=carga
 
     def __str__(self):
-         return "color {}, {} km/h, {} ruedas, {} cc, {} kg".format(
-self.color, self.velocidad, self.ruedas, self.cilindrada, self.carga )
+         return Coche.__str__(self) + f",Carga: {self.carga} kg de carga"
     
 class Motocicleta(Bicicleta):
     def __init__(self, color, ruedas, tipo, velocidad, cilindrada):
@@ -41,12 +38,13 @@ class Motocicleta(Bicicleta):
         self.cilindrada=cilindrada
 
     def __str__(self):
-         return "color {}, {} km/h, {} ruedas, {} cc".format(
-self.color, self.velocidad, self.ruedas, self.cilindrada )
-    
+        return Bicicleta.__str__(self) + f", Velocidad: {self.velocidad} km/h, Cilidrada: {self.cilindrada} cc"
 
 
 
-
+bicicleta=Bicicleta("rojo", 2, "urbana")
+moto=Motocicleta("negra", 2, "urbana", 180, 600)
 coche = Coche("azul", 150, 4, 1200)
 print(coche)
+print(bicicleta)
+print(moto)
