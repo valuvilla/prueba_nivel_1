@@ -10,7 +10,7 @@ class Vehiculo():
 
 class Coche(Vehiculo):
     def __init__(self, color, ruedas, velocidad, cilindrada,tipo_vehiculo):
-        super().__init__(color, ruedas)
+        super().__init__(color, ruedas, tipo_vehiculo)
         self.tipo_vehiculo="Coche"
         self.velocidad = velocidad
         self.cilindrada = cilindrada

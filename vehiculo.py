@@ -20,7 +20,6 @@ class Vehiculos():
     lista=[]
 
     @staticmethod
-    def agregar_lista(color, ruedas, velocidad, cilindrada):
-        coche=Coche(color, ruedas, velocidad, cilindrada)
-        
+    def agregar_lista():
+        coche=Coche()
 
