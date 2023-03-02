@@ -1,3 +1,6 @@
+import config
+import csv
+
 class Vehiculo():
     def __init__(self, color, ruedas):
         self.color = color
@@ -48,7 +51,20 @@ class Motocicleta(Bicicleta):
 class Vehiculos():
 
     lista=[]
-    with open 
+    with open(config.DATABASE_PATH, "r") as file:
+        reader=csv.reader(file, delimiter=";")
+        for color, ruedas, velocidad, cilindrada, tipo, carga, tipo_vehiculo in reader:
+            if tipo_vehiculo=="Coche":
+                if carga==None:
+                    vehiculo=Coche(color, ruedas, velocidad, cilindrada,tipo_vehiculo)
+                vehiculo=Camioneta(color, ruedas, velocidad, cilindrada,carga)
+            elif tipo_vehiculo=="Bicicleta":
+                if velocidad==None:
+                    vehiculo=Bicicleta(color, ruedas, tipo, tipo_vehiculo)
+                vehiculo=Motocicleta(color, ruedas, tipo, velocidad, cilindrada)
+            lista.append(vehiculo)
+
+    
 
     @staticmethod
     def agregar_lista(color, ruedas, velocidad, cilindrada,tipo,carga,tipo_vehiculo):
@@ -63,6 +79,9 @@ class Vehiculos():
             vehiculo=Motocicleta(color, ruedas, tipo, velocidad, cilindrada)
         Vehiculos.lista.append(vehiculo)
         return vehiculo
+    
+
+
     
 
 
