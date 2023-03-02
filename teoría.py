@@ -80,9 +80,25 @@ class Vehiculos():
             if tipo == "urbana":
                 bicicleta=Bicicleta(color, ruedas, tipo)
                 Vehiculos.lista_bicicleta.append(bicicleta)
+                return bicicleta
             elif tipo == "deportiva":
                 motocicleta=Motocicleta(color, ruedas, tipo, velocidad, cilindrada)
                 Vehiculos.lista_bicicleta.append(motocicleta)
+                return motocicleta
+        else:
+            return "No se puede agregar el vehiculo"
+        
+    @staticmethod
+    def catalogar():
+        ruedas=0
+        for vehiculo in Vehiculos.lista_coche:
+            ruedas+=vehiculo.ruedas
+        for vehiculo in Vehiculos.lista_bicicleta:
+            ruedas+=vehiculo.ruedas
+        return f'Hay {len(Vehiculos.lista_coche)+len(Vehiculos.lista_bicicleta)} vehiculos y {ruedas} ruedas en total'
+    
+    
+    '
         
         
     
