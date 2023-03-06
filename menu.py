@@ -46,16 +46,25 @@ def iniciar():
             tipo_vehuclo=None
             while True:
                 tipo_vehuclo=input("Introduce el tipo de vehículo:  C/B ").lower()
-                if tipo_vehuclo=="c" or tipo_vehuclo=="m":
+                if tipo_vehuclo=="c" or tipo_vehuclo=="b":
                     break
             if tipo_vehuclo=="c":
                 num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
                 color=input("Introduce el color: ")
-                
-                
-                db.Vehiculos.agregar_vehiculo(db.Coche(num_bastidor, marca, modelo, color, precio, num_puertas))
-
-            
+                ruedas=4
+                velocidad=int(input("Introduce la velocidad: "))
+                cilindrada=int(input("Introduce la cilindrada: "))
+                carga=int(input("Introduce la carga: "))
+                equipo=int(input("Introduce el equipaje: "))
+                db.Vehiculos.crear_coche(color, ruedas, velocidad, cilindrada, carga, equipo)
+            elif tipo_vehuclo=="b":
+                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
+                color=input("Introduce el color: ")
+                ruedas=2
+                velocidad=int(input("Introduce la velocidad: "))
+                cilindrada=int(input("Introduce la cilindrada: "))
+                tipo=input("Introduce el tipo: ")
+                db.Vehiculos.crear_bici(color, ruedas, velocidad, cilindrada, tipo)
         elif opcion == "4":
             print(Back.CYAN+Fore.WHITE+"Eliminar vehículo")
             num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), Vehiculos.lista)
