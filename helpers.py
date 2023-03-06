@@ -18,17 +18,6 @@ def validar_entero(mensaje: str) -> int:
             print("Error, debe ingresar un número entero")
 
 
-def validar_ruedas(mensaje: str) -> int:
-    while True:
-        try:
-            numero = int(input(mensaje))
-            if numero < 0:
-                print("Error, debe ingresar un número entero positivo")
-            else:
-                return numero
-        except ValueError:
-            print("Error, debe ingresar un número entero")
-
 def validar_texto(mensaje: str) -> str:
     while True:
         texto = input(mensaje)

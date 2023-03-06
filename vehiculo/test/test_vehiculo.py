@@ -3,7 +3,9 @@ import copy
 import config
 import helpers
 import unittest
-import teoría as vl
+import vehiculo as vl
+import coche as cl
+import bicicleta as bl
 
 class testVehiculo(unittest.TestCare):
 
