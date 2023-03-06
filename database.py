@@ -3,9 +3,6 @@ import csv
 
 
 
-
-
-
 class Vehiculo():
     def __init__(self, color, ruedas, num_bastidor):
         self.color = color
@@ -18,7 +15,7 @@ class Vehiculo():
 import config
 import csv
 
-from vehiculo.vehiculo import Vehiculos
+from database import Vehiculos
 
 
 class Coche(Vehiculos):
@@ -98,7 +95,7 @@ class Vehiculos():
 
     staticmethod
     def buscar_coche(num_bastidor):
-        for coche in Coches.lista:
+        for coche in Vehiculos.lista:
             if coche.num_bastidor==num_bastidor:
                 print("Coche encontrado")
                 if coche.equipo==None and coche.carga==None:
@@ -149,7 +146,7 @@ class Vehiculos():
 
     @staticmethod
     def buscar_bici(num_bastidor):
-        for bici in Bicis.lista:
+        for bici in Vehiculos.lista:
             if bici.num_bastidor==num_bastidor:
                 print("Bici encontrada")
                 if bici.tipo==None:

@@ -1,8 +1,7 @@
 import helpers
 from colorama import Fore, Back, Style
 from termcolor import colored
-import vehiculo.vehiculo as Vehiculos
-
+import database as Vehiculos
 
 def iniciar():
     while True:
