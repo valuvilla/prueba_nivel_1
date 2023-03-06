@@ -78,10 +78,10 @@ class Vehiculos():
 
     @staticmethod
     def crear_coche(color, ruedas, num_bastidor, velocidad, cilindrada, carga, equipo):
-        if equipo=="" and carga=="":
+        if equipo=="NO" and carga=="0":
             coche=Coche(color, ruedas, num_bastidor, velocidad, cilindrada)
             Vehiculos.lista.append(coche)
-        elif equipo=="":
+        elif equipo=="NO":
             coche=Camioneta(color, ruedas, num_bastidor, velocidad, cilindrada, carga)
             Vehiculos.lista.append(coche)
         else:

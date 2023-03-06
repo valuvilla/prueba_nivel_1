@@ -33,7 +33,7 @@ def iniciar():
             print(Back.CYAN+Fore.WHITE+"Buscar vehículo")
             num_bastidor=None
             while True:
-                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
+                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor (2 chars y 1 int): "), db.Vehiculos.lista).upper()	
                 if re.match('[0-9]{2}[A-Z]$', num_bastidor):
                     break
                 vehiculo=db.Vehiculos.buscar_vehiculo(num_bastidor)
@@ -50,7 +50,7 @@ def iniciar():
                 if tipo_vehuclo=="c" or tipo_vehuclo=="b":
                     break
             if tipo_vehuclo=="c":
-                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
+                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor (2 chars y 1 int): "), db.Vehiculos.lista)
                 color=input("Introduce el color: ")
                 ruedas=4
                 velocidad=int(input("Introduce la velocidad (): "))
