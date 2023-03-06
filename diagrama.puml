@@ -1,0 +1,39 @@
+@startuml clases
+
+class Vehiculo {
+  - color: String
+  - ruedas: Int
+  - numBastidor: String
+}
+
+class Coche {
+  - velocidad: Int
+  - cilindrada: Int
+}
+
+class Bicicleta {
+  - tipo: String
+}
+
+class Formula1 {
+  - equipo: String
+}
+
+class Camioneta {
+  - carga: Int
+}
+
+class Motocicleta {
+  - velocidad: Int
+  - cilindrada: Int
+}
+
+
+Vehiculo --|> Coche
+Vehiculo --|> Bicicleta
+Coche --|> Formula1
+Coche --|> Camioneta
+Bicicleta --|> Motocicleta
+
+
+@enduml
