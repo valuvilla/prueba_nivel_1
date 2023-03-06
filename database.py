@@ -64,14 +64,14 @@ class Vehiculos():
         reader=csv.reader(fichero)
         for color, ruedas, num_bastidor, velocidad, cilindrada, carga, equipo, tipo in reader:
             if ruedas==4:
-                if carga=="" and equipo=="":
+                if carga==0 and equipo=="NO":
                     lista.append(Coche(color, ruedas, num_bastidor, velocidad, cilindrada))
-                elif equipo=="":
+                elif equipo=="NO":
                     lista.append(Camioneta(color, ruedas, num_bastidor, velocidad, cilindrada, carga))
                 else:
                     lista.append(Formula1(color, ruedas, num_bastidor, velocidad, cilindrada, equipo))
             elif ruedas==2:
-                if velocidad=="" and cilindrada=="":
+                if velocidad==0 and cilindrada==0:
                     lista.append(Bicicleta(color, ruedas, num_bastidor, tipo))
                 else:
                     lista.append(Motocicleta(color, ruedas, num_bastidor, tipo, velocidad, cilindrada))

@@ -1,8 +1,9 @@
 import re
 import helpers
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style, init
 from termcolor import colored
 import database as db
+init(autoreset=True)
 
 def iniciar():
     while True:
@@ -52,17 +53,17 @@ def iniciar():
                 num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
                 color=input("Introduce el color: ")
                 ruedas=4
-                velocidad=int(input("Introduce la velocidad: "))
-                cilindrada=int(input("Introduce la cilindrada: "))
-                carga=int(input("Introduce la carga: "))
-                equipo=int(input("Introduce el equipaje: "))
+                velocidad=int(input("Introduce la velocidad (): "))
+                cilindrada=int(input("Introduce la cilindrada (): "))
+                carga=int(input("Introduce la carga (SI NO TIENE PONER 0): "))
+                equipo=(input("Introduce el equipo (SI NO TIENE PONER <NO>): ")).upper()
                 db.Vehiculos.crear_coche(color, ruedas, velocidad, cilindrada, carga, equipo)
             elif tipo_vehuclo=="b":
                 num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
                 color=input("Introduce el color: ")
                 ruedas=2
-                velocidad=int(input("Introduce la velocidad: "))
-                cilindrada=int(input("Introduce la cilindrada: "))
+                velocidad=int(input("Introduce la velocidad (SI NO TIENE PONER 0): "))
+                cilindrada=int(input("Introduce la cilindrada (SI NO TIENE PONER 0): "))
                 tipo=input("Introduce el tipo: ")
                 db.Vehiculos.crear_bici(color, ruedas, velocidad, cilindrada, tipo)
         elif opcion == "4":
