@@ -47,14 +47,14 @@ def leer_texto(longitud_min=0, longitud_max=100, mensaje=None)
             return texto
         
 
-def Numero_Bastidor_Válido(numero_bastidor, lista):
+def Numero_Bastidor_Válido(num_bastidor, lista):
     #comprobar que el dni tiene el formato correcto
-    if not re.match('[0-9]{2}[A-Z]$', numero_bastidor):
-        print(Back.RED+f"El formato de DNI: {numero_bastidor} no es correcto")
+    if not re.match('[0-9]{2}[A-Z]$', num_bastidor):
+        print(Back.RED+f"El formato de DNI: {num_bastidor} no es correcto")
         return False
     #comprobar que el dni no está en la lista
     for vehiculo in lista:
-        if vehiculo.numbastidor_ == numero_bastidor:
-            print(Back.RED+f"El Número de Bastidor: {numero_bastidor} ya existe")
+        if vehiculo.num_bastidor_ == num_bastidor:
+            print(Back.RED+f"El Número de Bastidor: {num_bastidor} ya existe")
             return False
     return True

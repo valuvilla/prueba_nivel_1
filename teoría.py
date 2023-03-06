@@ -1,3 +1,4 @@
+
 import config
 import csv
 
@@ -7,7 +8,7 @@ class Vehiculo():
         self.ruedas = ruedas
         self.num_bastidor = num_bastidor
     def __str__(self):
-        return f"Color: {self.color}, {self.ruedas} ruedas"
+        return f"Color: {self.color}, {self.ruedas} ruedas, Número de Bastidor: {self.num_bastidor}"
 
 class Coche(Vehiculo):
     def __init__(self, color, ruedas,num_bastidor, velocidad, cilindrada):
@@ -45,34 +46,13 @@ class Motocicleta(Bicicleta):
         return Bicicleta.__str__(self) + f", Velocidad: {self.velocidad} km/h, Cilidrada: {self.cilindrada} cc"
 
 class Formula1(Coche):
-    def __init__(self, color, ruedas, velocidad, cilindrada, equipo):
-        super().__init__(color, ruedas, velocidad, cilindrada)
+    def __init__(self, color, ruedas, num_bastidor, velocidad, cilindrada, equipo):
+        super().__init__(color, ruedas, num_bastidor, velocidad, cilindrada)
         self.equipo=equipo
 
     def __str__(self):
         return Coche.__str__(self) + f", Equipo: {self.equipo}"
     
-
-# Hacer herencia múltiple
-class MotoFormula1(Motocicleta, Formula1):
-    def __init__(self, color, ruedas, velocidad, cilindrada, equipo):
-        super().__init__(color, ruedas, velocidad, cilindrada, equipo)
-
-    def __str__(self):
-        return Motocicleta.__str__(self) + f", Equipo: {self.equipo}"
-    
-
-# Hacer herencia múltiple
-class CamionetaFormula1(Camioneta, Formula1):
-    def __init__(self, color, ruedas, velocidad, cilindrada, equipo, carga):
-        super().__init__(color, ruedas, velocidad, cilindrada, equipo, carga)
-
-    def __str__(self):
-        return Camioneta.__str__(self) + f", Equipo: {self.equipo}"
-
-
-coche=CamionetaFormula1("rojo", 4, 100, 2000, "Ferrari", 1000)
-print(coche)
 
 # busqueda de bastidores
 # busqueda por tipos
@@ -83,23 +63,29 @@ print(coche)
 
 class Vehiculos():
 
-    lista_coche=[]
-    lista_bicicleta=[]
+    lista=[]
     with open(config.DATABASE_PATH, "r") as file:
         reader=csv.reader(file)
+        for num_bastidores,
 
 
     
 
     @staticmethod
-    def buscar_vehiculo(ruedas):
-        for vehiculo in Vehiculos.lista_coche:
-            if vehiculo.ruedas == ruedas:
-                return vehiculo
-        for vehiculo in Vehiculos.lista_bicicleta:
-            if vehiculo.ruedas == ruedas:
-                return vehiculo
-        return None
+    def buscar_vehiculo(num_bastidor):
+        # Buscar un vehículo por su número de bastidor
+        for vehiculo in Vehiculos.lista:
+            if vehiculo.num_bastidor == num_bastidor:
+                if vehiculo.ruedas==4:
+                    if vehiculo.carga==None:
+                        return Coche(vehiculo.color, vehiculo.ruedas, vehiculo.num_bastidor, vehiculo.velocidad, vehiculo.cilindrada)
+                    else:
+                        return Camioneta(vehiculo.color, vehiculo.ruedas, vehiculo.num_bastidor, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.carga)
+                elif vehiculo.ruedas==2:
+                    if vehiculo.tipo=="urbana":
+                        return Bicicleta(vehiculo.color, vehiculo.ruedas, vehiculo.num_bastidor, vehiculo.tipo)
+                    elif vehiculo.tipo=="deportiva":
+                        return Motocicleta(vehiculo.color, vehiculo.ruedas, vehiculo.num_bastidor, vehiculo.tipo, vehiculo.velocidad, vehiculo.cilindrada)
     
     @staticmethod
     def agregar_lista(color, ruedas, velocidad, cilindrada, tipo, carga):
@@ -134,7 +120,7 @@ class Vehiculos():
         return f'Hay {len(Vehiculos.lista_coche)+len(Vehiculos.lista_bicicleta)} vehiculos y {ruedas} ruedas en total'
     
 
-    '
+
         
         
     
