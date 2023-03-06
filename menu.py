@@ -1,7 +1,8 @@
+import re
 import helpers
 from colorama import Fore, Back, Style
 from termcolor import colored
-import database as Vehiculos
+import database as db
 
 def iniciar():
     while True:
@@ -23,28 +24,37 @@ def iniciar():
 
         if opcion == "1":
             print(Back.CYAN+Fore.WHITE+"Listar vehículos")
-            print("Coches:")
-            Vehiculos.mostrar_coches()
-            print("Bicicletas:")
-            Vehiculos.mostrar_bicis()
+            # Listar vehiculos
+            db.Vehiculos.listar_vehiculos()
             
             
         elif opcion == "2":
             print(Back.CYAN+Fore.WHITE+"Buscar vehículo")
-            num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), Vehiculos.lista)
+            num_bastidor=None
+            while True:
+                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
+                if re.match('[0-9]{2}[A-Z]$', num_bastidor):
+                    break
+                vehiculo=db.Vehiculos.buscar_vehiculo(num_bastidor)
+                print(vehiculo) if vehiculo else print("No se ha encontrado el vehículo")
 
-            for vehiculo in Vehiculos.lista:
-                if vehiculo.num_bastidor==num_bastidor:
-                    print("Vehículo encontrado")
-                    Vehiculos.buscar_vehiculo(num_bastidor)
+
             
         elif opcion == "3":
             print(Back.CYAN+Fore.WHITE+"Agregar vehículo")
-            tipo_vehiculo=helpers.limpiar_pantalla(input("Introduce el tipo de vehículo (C)Coche o (B)Bicicleta: "))            
-            if tipo_vehiculo=="C":
-                Vehiculos.crear_coche()
-            elif tipo_vehiculo=="B":
-                Vehiculos.crear_bici()
+            # Agregar vehiculo
+            tipo_vehuclo=None
+            while True:
+                tipo_vehuclo=input("Introduce el tipo de vehículo:  C/B ").lower()
+                if tipo_vehuclo=="c" or tipo_vehuclo=="m":
+                    break
+            if tipo_vehuclo=="c":
+                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
+                color=input("Introduce el color: ")
+                
+                
+                db.Vehiculos.agregar_vehiculo(db.Coche(num_bastidor, marca, modelo, color, precio, num_puertas))
+
             
         elif opcion == "4":
             print(Back.CYAN+Fore.WHITE+"Eliminar vehículo")

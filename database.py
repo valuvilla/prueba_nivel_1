@@ -12,13 +12,8 @@ class Vehiculo():
     def __str__(self):
         return f"Color: {self.color}, {self.ruedas} ruedas, Número de Bastidor: {self.num_bastidor}"
 
-import config
-import csv
 
-from database import Vehiculos
-
-
-class Coche(Vehiculos):
+class Coche(Vehiculo):
     def __init__(self, color, ruedas,num_bastidor, velocidad, cilindrada):
         super().__init__(color, ruedas, num_bastidor)
         self.velocidad = velocidad
