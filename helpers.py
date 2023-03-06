@@ -15,7 +15,7 @@ def validar_entero(mensaje: str) -> int:
             numero = int(input(mensaje))
             return numero
         except ValueError:
-            print("Error, debe ingresar un número entero")ç
+            print("Error, debe ingresar un número entero")
 
 
 def validar_ruedas(mensaje: str) -> int:
@@ -27,7 +27,7 @@ def validar_ruedas(mensaje: str) -> int:
             else:
                 return numero
         except ValueError:
-            print("Error, debe ingresar un número entero")ç
+            print("Error, debe ingresar un número entero")
 
 def validar_texto(mensaje: str) -> str:
     while True:
@@ -37,7 +37,7 @@ def validar_texto(mensaje: str) -> str:
         else:
             print("Error, debe ingresar un texto válido")
 
-def leer_texto(longitud_min=0, longitud_max=100, mensaje=None)
+def leer_texto(longitud_min=0, longitud_max=100, mensaje=None):
     print(mensaje) if mensaje else None
     while True:
         texto = input("Ingrese un texto: ")
