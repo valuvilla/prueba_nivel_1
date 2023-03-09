@@ -43,14 +43,39 @@ def iniciar():
         elif opcion == "3":
             print(Back.LIGHTGREEN_EX+"Añadiendo un cliente...\n")
 
+            helpers.limpiar_pantalla()
+
+            lineas=(Fore.BLUE +"="*50)
+            print(lineas)
+            print(colored((("Bienvenido al menú de crear vehículos").upper()).center(50), "white", "on_blue"))
+            print(lineas)
+            print(colored(Fore.BLUE+"[1]"),"Coche")
+            print(colored(Fore.BLUE+"[2]"),"Bicicleta")
+            print(colored(Fore.BLUE+"[3]"),"Formula 1")
+            print(colored(Fore.BLUE+"[4]"),"Camioneta")
+            print(colored(Fore.BLUE+"[5]"),"Moto")
+            print(colored(Fore.BLUE+"[6]"),"Quad")
+            print(colored(Fore.RED+"[7]"),("SALIR"))
+            print(lineas)
+
+            opcion = input(colored(Fore.BLUE+"Elige una opción: ", "blue"))
+            helpers.limpiar_pantalla()
+
             num_bastidor = None
             while True:
-                num_bastidori = helpers.leer_texto(3, 3, "num_bastidorI (2 int y 1 char)").upper()
-                if helpers.num_bastidor_válido(num_bastidori, db.Clientes.lista):
+                num_bastidor = helpers.leer_texto(3, 3, "num_bastidor (2 int y 1 char)").upper()
+                if helpers.num_bastidor_valido(num_bastidor, db.Vehiculos.lista):
                     break
+            
+            color= helpers.leer_texto(2, 30, "Color (de 2 a 30 chars)").capitalize()
+            ruedas = helpers.validar_ruedas(2, 4, "Ruedas (de 2 o 4)")
 
-            nombre = helpers.leer_texto(2, 30, "Nombre (de 2 a 30 chars)").capitalize()
-            apellido = helpers.leer_texto(2, 30, "Apellido (de 2 a 30 chars)").capitalize()
-            db.Clientes.agregar_cliente(num_bastidori, nombre, apellido)
-            print((Back.GREEN+"\nCliente añadido correctamente"), (Fore.GREEN+'\nDatos del cliente:'))
-            print(f"num_bastidorI: {num_bastidori} \nNombre: {nombre} \nApellido: {apellido}")
+            if opcion == "1":
+                print(Back.LIGHTGREEN_EX+"Añadiendo un coche...\n")
+                velocidad= helpers.validar_entero(0, 250, "Velocidad (de 0 a 250): ")
+                cilindrada= helpers.validar_entero(0, 10000, "Cilindrada (de 0 a 10000): ")
+                db.Vehiculos.crear("Coche", num_bastidor, color, ruedas, velocidad, cilindrada)
+
+            
+        
+        
