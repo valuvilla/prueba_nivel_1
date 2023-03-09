@@ -47,6 +47,7 @@ def validar_ruedas(mensaje: str) -> int:
         try:
             numero = int(input(mensaje))
             if numero != 2 or numero != 4:
+                print(numero)
                 print("Error, debe ingresar un número entero entre 2 y 4")
             else:
                 return numero
