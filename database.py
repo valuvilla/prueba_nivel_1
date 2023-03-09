@@ -67,34 +67,34 @@ class Quad(Coche):
     def __str__(self):
         return Coche.__str__(self) + f", Tipo: {self.tipo}, Modelo: {self.modelo}, Carga: {self.carga} kg de carga"
     
-class Vehiculos():
-    lista=[]
-    with open(config.DATABASE_PATH) as fichero:
-        reader=csv.reader(fichero)
+class Vehiculos:
+    lista = []
+    with open(config.DATABASE_PATH, newline='\n') as fichero:
+        reader = csv.reader(fichero, delimiter=';')
         for tipo in reader:
-            if tipo=="Coche":
-                coche=Coche(*tipo[1:])
+            if tipo[0] == "Coche":
+                coche = Coche(*tipo[1:])
                 lista.append(coche)
-            elif tipo=="Formula1":
-                coche=Formula1(*tipo[1:])
-                lista.append(coche)
-            elif tipo=="Camioneta":
-                coche=Camioneta(*tipo[1:])
-                lista.append(coche)
-            elif tipo=="Bicicleta":
-                coche=Bicicleta(*tipo[1:])
-                lista.append(coche)
-            elif tipo=="Motocicleta":
-                coche=Motocicleta(*tipo[1:])
-                lista.append(coche)
-            elif tipo=="Quad":
-                coche=Quad(*tipo[1:])
-                lista.append(coche)
+            if tipo[0] == "Bicicleta":
+                bicicleta = Bicicleta(*tipo[1:])
+                lista.append(bicicleta)
+            if tipo[0] == "Formula1":
+                formula1 = Formula1(*tipo[1:])
+                lista.append(formula1)
+            if tipo[0] == "Camioneta":
+                camioneta = Camioneta(*tipo[1:])
+                lista.append(camioneta)
+            if tipo[0] == "Motocicleta":
+                motocicleta = Motocicleta(*tipo[1:])
+                lista.append(motocicleta)
+            if tipo[0] == "Quad":
+                quad = Quad(*tipo[1:])
+                lista.append(quad)
 
     @staticmethod
-    def buscar(num_bastidor):
+    def buscar(id):
         for vehiculo in Vehiculos.lista:
-            if vehiculo.num_bastidor == num_bastidor:
+            if vehiculo.num_bastidor == id:
                 return vehiculo
 
     @staticmethod
@@ -116,9 +116,9 @@ class Vehiculos():
         return vehiculo
 
     @staticmethod
-    def borrar(num_bastidor):
+    def borrar(id):
         for indice, vehiculo in enumerate(Vehiculos.lista):
-            if vehiculo.num_bastidor == num_bastidor:
+            if vehiculo.num_bastidor == id:
                 vehiculo = Vehiculos.lista.pop(indice)
                 Vehiculos.guardar()
                 return vehiculo
@@ -128,15 +128,15 @@ class Vehiculos():
         with open(config.DATABASE_PATH, 'w', newline='\n') as fichero:
             writer = csv.writer(fichero, delimiter=';')
             for vehiculo in Vehiculos.lista:
-                if type(vehiculo)._name_ == "Coche":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada))
-                elif type(vehiculo)._name_ == "Bicicleta":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.tipo))
-                elif type(vehiculo)._name_ == "Formula1":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.equipo))
-                elif type(vehiculo)._name_ == "Camioneta":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.carga))
-                elif type(vehiculo)._name_ == "Motocicleta":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.tipo, vehiculo.velocidad, vehiculo.cilindrada))
-                elif type(vehiculo)._name_ == "Quad":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.tipo, vehiculo.modelo, vehiculo.carga))
+                if type(vehiculo).__name__ == "Coche":
+                    writer.writerow((type(vehiculo).__name__, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada))
+                elif type(vehiculo).__name__ == "Bicicleta":
+                    writer.writerow((type(vehiculo).__name__, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.tipo))
+                elif type(vehiculo).__name__ == "Formula1":
+                    writer.writerow((type(vehiculo).__name__, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.equipo))
+                elif type(vehiculo).__name__ == "Camioneta":
+                    writer.writerow((type(vehiculo).__name__, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.carga))
+                elif type(vehiculo).__name__ == "Motocicleta":
+                    writer.writerow((type(vehiculo).__name__, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.tipo, vehiculo.velocidad, vehiculo.cilindrada))
+                elif type(vehiculo).__name__ == "Quad":
+                    writer.writerow((type(vehiculo).__name__, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.tipo, vehiculo.modelo, vehiculo.carga))

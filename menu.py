@@ -74,8 +74,7 @@ def iniciar():
                 velocidad= helpers.leer_numero(0, 250, "Velocidad (de 0 a 250): ")
                 cilindrada= helpers.leer_numero(0, 10000, "Cilindrada (de 0 a 10000): ")
                 db.Vehiculos.crear("Coche", num_bastidor, color, ruedas, velocidad, cilindrada)
-                print(Back.GREEN+"Coche creado correctamente")
-
+        
 
             
         
