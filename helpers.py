@@ -36,7 +36,7 @@ def leer_texto(longitud_min=0, longitud_max=100, mensaje=None):
             return texto
         
 
-def Numero_Bastidor_Válido(num_bastidor, lista):
+def numero_bastidor_valido(num_bastidor, lista):
     #comprobar que el dni tiene el formato correcto
     if not re.match('[0-9]{2}[A-Z]$', num_bastidor):
         print(Back.RED+f"El formato de numero de bastidor {num_bastidor} no es correcto")

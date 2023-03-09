@@ -57,144 +57,86 @@ class Motocicleta(Bicicleta):
     def __str__(self):
         return Bicicleta.__str__(self) + f", Velocidad: {self.velocidad} km/h, Cilidrada: {self.cilindrada} cc"
     
+class Quad(Coche):
+    def __init__(self, color, ruedas, num_bastidor, velocidad, cilindrada, tipo, modelo, carga):
+        super().__init__(color, ruedas, num_bastidor, velocidad, cilindrada)
+        self.tipo=tipo
+        self.modelo=modelo
+        self.carga=carga
 
+    def __str__(self):
+        return Coche.__str__(self) + f", Tipo: {self.tipo}, Modelo: {self.modelo}, Carga: {self.carga} kg de carga"
+    
 class Vehiculos():
     lista=[]
     with open(config.DATABASE_PATH) as fichero:
         reader=csv.reader(fichero)
-        for color, ruedas, num_bastidor, velocidad, cilindrada, carga, equipo, tipo in reader:
-            if ruedas==4:
-                if carga==0 and equipo=="NO":
-                    lista.append(Coche(color, ruedas, num_bastidor, velocidad, cilindrada))
-                elif equipo=="NO":
-                    lista.append(Camioneta(color, ruedas, num_bastidor, velocidad, cilindrada, carga))
-                else:
-                    lista.append(Formula1(color, ruedas, num_bastidor, velocidad, cilindrada, equipo))
-            elif ruedas==2:
-                if velocidad==0 and cilindrada==0:
-                    lista.append(Bicicleta(color, ruedas, num_bastidor, tipo))
-                else:
-                    lista.append(Motocicleta(color, ruedas, num_bastidor, tipo, velocidad, cilindrada))
+        for tipo_v in reader:
+            if tipo_v=="Coche":
+                coche=Coche(*tipo_v[1:])
+                lista.append(coche)
+            elif tipo_v=="Formula1":
+                coche=Formula1(*tipo_v[1:])
+                lista.append(coche)
+            elif tipo_v=="Camioneta":
+                coche=Camioneta(*tipo_v[1:])
+                lista.append(coche)
+            elif tipo_v=="Bicicleta":
+                coche=Bicicleta(*tipo_v[1:])
+                lista.append(coche)
+            elif tipo_v=="Motocicleta":
+                coche=Motocicleta(*tipo_v[1:])
+                lista.append(coche)
+            elif tipo_v=="Quad":
+                coche=Quad(*tipo_v[1:])
+                lista.append(coche)
 
     @staticmethod
-    def crear_coche(color, ruedas, num_bastidor, velocidad, cilindrada, carga, equipo):
-        if equipo=="NO" and carga=="0":
-            coche=Coche(color, ruedas, num_bastidor, velocidad, cilindrada)
-            Vehiculos.lista.append(coche)
-        elif equipo=="NO":
-            coche=Camioneta(color, ruedas, num_bastidor, velocidad, cilindrada, carga)
-            Vehiculos.lista.append(coche)
-        else:
-            coche=Formula1(color, ruedas, num_bastidor, velocidad, cilindrada, equipo)
-            Vehiculos.lista.append(coche)
-
-    staticmethod
-    def buscar_coche(num_bastidor):
-        for coche in Vehiculos.lista:
-            if coche.num_bastidor==num_bastidor:
-                print("Coche encontrado")
-                if coche.equipo==None and coche.carga==None:
-                    return f'Color: {coche.color}, Ruedas: {coche.ruedas}, Numero de bastidor: {coche.num_bastidor}, Velocidad: {coche.velocidad} km/h, Cilindrada: {coche.cilindrada} cc'
-                elif coche.carga==None:
-                    return f'Color: {coche.color}, Ruedas: {coche.ruedas}, Numero de bastidor: {coche.num_bastidor}, Velocidad: {coche.velocidad} km/h, Cilindrada: {coche.cilindrada} cc, Equipo: {coche.equipo}'
-                else:
-                
-                    return f'Color: {coche.color}, Ruedas: {coche.ruedas}, Numero de bastidor: {coche.num_bastidor}, Velocidad: {coche.velocidad} km/h, Cilindrada: {coche.cilindrada} cc, Carga: {coche.carga} kg de carga'
-            
-
-    @staticmethod
-    def modificar_coche(color, ruedas, num_bastidor, velocidad, cilindrada, carga, equipo):
-        for coche, indice in enumerate(Vehiculos.lista):
-            if coche.num_bastidor==num_bastidor:
-                Vehiculos.lista[indice].color=color
-                Vehiculos.lista[indice].ruedas=ruedas
-                Vehiculos.lista[indice].velocidad=velocidad 
-                Vehiculos.lista[indice].cilindrada=cilindrada
-                Vehiculos.lista[indice].carga=carga
-                Vehiculos.lista[indice].equipo=equipo
-                print("Coche modificado")
-                Vehiculos.guardar_vehiculos()
-                return Vehiculos.lista[indice]
-            
-    @staticmethod
-    def modificar_bici(color, ruedas, num_bastidor, tipo):
-        for bici, indice in enumerate(Vehiculos.lista):
-            if bici.num_bastidor==num_bastidor:
-                Vehiculos.lista[indice].color=color
-                Vehiculos.lista[indice].ruedas=ruedas
-                Vehiculos.lista[indice].tipo=tipo
-                print("Bici modificada")
-                Vehiculos.guardar_vehiculos()
-                return Vehiculos.lista[indice]
-            
-    
-
-
-    @staticmethod
-    def crear_bici(color, ruedas, num_bastidor, velocidad, cilindrada, tipo):
-        if velocidad=="" and cilindrada=="":
-            bici=Bicicleta(color, ruedas, num_bastidor, tipo)
-            Vehiculos.lista.append(bici)
-        else:
-            bici=Motocicleta(color, ruedas, num_bastidor, tipo, velocidad, cilindrada)
-            Vehiculos.lista.append(bici)
-
-    @staticmethod
-    def buscar_bici(num_bastidor):
-        for bici in Vehiculos.lista:
-            if bici.num_bastidor==num_bastidor:
-                print("Bici encontrada")
-                if bici.tipo==None:
-                    return f'Color: {bici.color}, Ruedas: {bici.ruedas}, Numero de bastidor: {bici.num_bastidor}'
-                elif bici.velocidad==None:
-                    return f'Color: {bici.color}, Ruedas: {bici.ruedas}, Numero de bastidor: {bici.num_bastidor}, Tipo: {bici.tipo}'
-                else:
-                    return f'Color: {bici.color}, Ruedas: {bici.ruedas}, Numero de bastidor: {bici.num_bastidor}, Velocidad: {bici.velocidad} km/h, Cilindrada: {bici.cilindrada} cc, Tipo: {bici.tipo}'
-
-
-
-
-    @staticmethod
-    def buscar_vehiculo(num_bastidor):
+    def buscar(id):
         for vehiculo in Vehiculos.lista:
-            if vehiculo.num_bastidor==num_bastidor:
-                print("Vehículo encontrado")
-                if vehiculo.ruedas==4:
-                    Vehiculos.buscar_coche(num_bastidor)
-                elif vehiculo.ruedas==2:
-                    Vehiculos.buscar_bici(num_bastidor)
+            if vehiculo.id == id:
+                return vehiculo
 
     @staticmethod
-    def listar_vehiculos():
-        for vehiculo in Vehiculos.lista:
-            print(vehiculo)
-
-
-
-    @staticmethod
-    def eliminar_vehiculo(num_bastidor):
-        for vehiculo in Vehiculos.lista:
-            if vehiculo.num_bastidor==num_bastidor:
-                Vehiculos.lista.remove(vehiculo)
-                print("Vehículo eliminado")
-    
-    @staticmethod
-    def modificar_vehiculo(num_bastidor):
-        for vehiculo in Vehiculos.lista:
-            if vehiculo.num_bastidor==num_bastidor:
-                print("Vehículo encontrado")
-                if vehiculo.ruedas==4:
-                    Vehiculos.modificar_coche(num_bastidor)
-                elif vehiculo.ruedas==2:
-                    Vehiculos.modificar_bici(num_bastidor)
+    def crear(opcion, *args):
+        if opcion == "1":
+            vehiculo = Coche(*args)
+        elif opcion == "2":
+            vehiculo = Bicicleta(*args)
+        elif opcion == "3":
+            vehiculo = Formula1(*args)
+        elif opcion == "4":
+            vehiculo = Camioneta(*args)
+        elif opcion == "5":
+            vehiculo = Motocicleta(*args)
+        elif opcion == "6":
+            vehiculo = Quad(*args)
+        Vehiculos.lista.append(vehiculo)
+        Vehiculos.guardar()
+        return vehiculo
 
     @staticmethod
-    def guardar_vehiculos():
-        with open(config.DATABASE_PATH, "w") as fichero:
-            writer=csv.writer(fichero)
+    def borrar(id):
+        for indice, vehiculo in enumerate(Vehiculos.lista):
+            if vehiculo.id == id:
+                vehiculo = Vehiculos.lista.pop(indice)
+                Vehiculos.guardar()
+                return vehiculo
+
+    @staticmethod
+    def guardar():
+        with open(config.DATABASE_PATH, 'w', newline='\n') as fichero:
+            writer = csv.writer(fichero, delimiter=';')
             for vehiculo in Vehiculos.lista:
-                writer.writerow(vehiculo)
-
-    
-
-            
+                if type(vehiculo)._name_ == "Coche":
+                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada))
+                elif type(vehiculo)._name_ == "Bicicleta":
+                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.tipo))
+                elif type(vehiculo)._name_ == "Formula1":
+                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.equipo))
+                elif type(vehiculo)._name_ == "Camioneta":
+                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.carga))
+                elif type(vehiculo)._name_ == "Motocicleta":
+                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.tipo, vehiculo.velocidad, vehiculo.cilindrada))
+                elif type(vehiculo)._name_ == "Quad":
+                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.tipo, vehiculo.modelo, vehiculo.carga))

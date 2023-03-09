@@ -17,7 +17,8 @@ def iniciar():
         print(colored(Fore.BLUE+"[2]"),"Buscar vehículo")
         print(colored(Fore.BLUE+"[3]"),"Agregar vehículo")
         print(colored(Fore.BLUE+"[4]"),"Eliminar vehículo")
-        print(colored(Fore.RED+"[5]"),("SALIR"))
+        print(colored(Fore.BLUE+"[5]"),"Catalogar vehículo")
+        print(colored(Fore.RED+"[6]"),("SALIR"))
         print(lineas)
 
         opcion = input(colored(Fore.BLUE+"Elige una opción: ", "blue"))
@@ -26,59 +27,30 @@ def iniciar():
         if opcion == "1":
             print(Back.CYAN+Fore.WHITE+"Listar vehículos")
             # Listar vehiculos
-            db.Vehiculos.listar_vehiculos()
-            
+            for vehiculo in db.Vehiculos.lista:
+                print(f'{type(vehiculo).__name__} {vehiculo}')
             
         elif opcion == "2":
             print(Back.CYAN+Fore.WHITE+"Buscar vehículo")
-            num_bastidor=None
+            nu = None
             while True:
-                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor (2 chars y 1 int): "), db.Vehiculos.lista).upper()	
+                num_bastidor = helpers.leer_texto(3, 3, "num_bastidor (2 int y 1 char)").upper()
                 if re.match('[0-9]{2}[A-Z]$', num_bastidor):
                     break
-                vehiculo=db.Vehiculos.buscar_vehiculo(num_bastidor)
-                print(vehiculo) if vehiculo else print("No se ha encontrado el vehículo")
+            vehiculo = db.Vehiculos.buscar(num_bastidor)
+            print(vehiculo) if vehiculo else print(Fore.RED+f"Cliente de num_bastidor: {num_bastidor} no encontrado.")
 
-
-            
         elif opcion == "3":
-            print(Back.CYAN+Fore.WHITE+"Agregar vehículo")
-            # Agregar vehiculo
-            tipo_vehuclo=None
+            print(Back.LIGHTGREEN_EX+"Añadiendo un cliente...\n")
+
+            num_bastidor = None
             while True:
-                tipo_vehuclo=input("Introduce el tipo de vehículo:  C/B ").lower()
-                if tipo_vehuclo=="c" or tipo_vehuclo=="b":
+                num_bastidori = helpers.leer_texto(3, 3, "num_bastidorI (2 int y 1 char)").upper()
+                if helpers.num_bastidor_válido(num_bastidori, db.Clientes.lista):
                     break
-            if tipo_vehuclo=="c":
-                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor (2 chars y 1 int): "), db.Vehiculos.lista)
-                color=input("Introduce el color: ")
-                ruedas=4
-                velocidad=int(input("Introduce la velocidad (): "))
-                cilindrada=int(input("Introduce la cilindrada (): "))
-                carga=int(input("Introduce la carga (SI NO TIENE PONER 0): "))
-                equipo=(input("Introduce el equipo (SI NO TIENE PONER <NO>): ")).upper()
-                db.Vehiculos.crear_coche(color, ruedas, velocidad, cilindrada, carga, equipo)
-            elif tipo_vehuclo=="b":
-                num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), db.Vehiculos.lista)
-                color=input("Introduce el color: ")
-                ruedas=2
-                velocidad=int(input("Introduce la velocidad (SI NO TIENE PONER 0): "))
-                cilindrada=int(input("Introduce la cilindrada (SI NO TIENE PONER 0): "))
-                tipo=input("Introduce el tipo: ")
-                db.Vehiculos.crear_bici(color, ruedas, velocidad, cilindrada, tipo)
-        elif opcion == "4":
-            print(Back.CYAN+Fore.WHITE+"Eliminar vehículo")
-            num_bastidor=helpers.Numero_Bastidor_Válido(input("Introduce el número de bastidor: "), Vehiculos.lista)
-            print(f'Vehículo con número de bastidor {num_bastidor} eliminado') if Vehiculos.eliminar_vehiculo(num_bastidor) else print("No se ha encontrado el vehículo")
 
-        
-
-            
-
-        elif opcion == "5":
-            print(colored(Fore.RED+"Saliendo..."))
-            break
-
-        input("\nPresiona ENTER para continuar...")
-        
-iniciar()
+            nombre = helpers.leer_texto(2, 30, "Nombre (de 2 a 30 chars)").capitalize()
+            apellido = helpers.leer_texto(2, 30, "Apellido (de 2 a 30 chars)").capitalize()
+            db.Clientes.agregar_cliente(num_bastidori, nombre, apellido)
+            print((Back.GREEN+"\nCliente añadido correctamente"), (Fore.GREEN+'\nDatos del cliente:'))
+            print(f"num_bastidorI: {num_bastidori} \nNombre: {nombre} \nApellido: {apellido}")
