@@ -68,13 +68,14 @@ def iniciar():
                     break
             
             color= helpers.leer_texto(2, 30, "Color (de 2 a 30 chars)").capitalize()
-            ruedas = helpers.validar_ruedas("Ruedas (de 2 o 4)")
+            ruedas = helpers.validar_ruedas("Ruedas (de 2 o 4): ")
 
             if opcion == "1":
-                print(Back.LIGHTGREEN_EX+"Añadiendo un coche...\n")
-                velocidad= helpers.validar_entero(0, 250, "Velocidad (de 0 a 250): ")
-                cilindrada= helpers.validar_entero(0, 10000, "Cilindrada (de 0 a 10000): ")
+                velocidad= helpers.leer_numero(0, 250, "Velocidad (de 0 a 250): ")
+                cilindrada= helpers.leer_numero(0, 10000, "Cilindrada (de 0 a 10000): ")
                 db.Vehiculos.crear("Coche", num_bastidor, color, ruedas, velocidad, cilindrada)
+                print(Back.GREEN+"Coche creado correctamente")
+
 
             
         

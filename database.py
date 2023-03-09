@@ -71,30 +71,30 @@ class Vehiculos():
     lista=[]
     with open(config.DATABASE_PATH) as fichero:
         reader=csv.reader(fichero)
-        for tipo_v in reader:
-            if tipo_v=="Coche":
-                coche=Coche(*tipo_v[1:])
+        for tipo in reader:
+            if tipo=="Coche":
+                coche=Coche(*tipo[1:])
                 lista.append(coche)
-            elif tipo_v=="Formula1":
-                coche=Formula1(*tipo_v[1:])
+            elif tipo=="Formula1":
+                coche=Formula1(*tipo[1:])
                 lista.append(coche)
-            elif tipo_v=="Camioneta":
-                coche=Camioneta(*tipo_v[1:])
+            elif tipo=="Camioneta":
+                coche=Camioneta(*tipo[1:])
                 lista.append(coche)
-            elif tipo_v=="Bicicleta":
-                coche=Bicicleta(*tipo_v[1:])
+            elif tipo=="Bicicleta":
+                coche=Bicicleta(*tipo[1:])
                 lista.append(coche)
-            elif tipo_v=="Motocicleta":
-                coche=Motocicleta(*tipo_v[1:])
+            elif tipo=="Motocicleta":
+                coche=Motocicleta(*tipo[1:])
                 lista.append(coche)
-            elif tipo_v=="Quad":
-                coche=Quad(*tipo_v[1:])
+            elif tipo=="Quad":
+                coche=Quad(*tipo[1:])
                 lista.append(coche)
 
     @staticmethod
-    def buscar(id):
+    def buscar(num_bastidor):
         for vehiculo in Vehiculos.lista:
-            if vehiculo.id == id:
+            if vehiculo.num_bastidor == num_bastidor:
                 return vehiculo
 
     @staticmethod
@@ -116,9 +116,9 @@ class Vehiculos():
         return vehiculo
 
     @staticmethod
-    def borrar(id):
+    def borrar(num_bastidor):
         for indice, vehiculo in enumerate(Vehiculos.lista):
-            if vehiculo.id == id:
+            if vehiculo.num_bastidor == num_bastidor:
                 vehiculo = Vehiculos.lista.pop(indice)
                 Vehiculos.guardar()
                 return vehiculo
@@ -129,14 +129,14 @@ class Vehiculos():
             writer = csv.writer(fichero, delimiter=';')
             for vehiculo in Vehiculos.lista:
                 if type(vehiculo)._name_ == "Coche":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada))
+                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada))
                 elif type(vehiculo)._name_ == "Bicicleta":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.tipo))
+                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.tipo))
                 elif type(vehiculo)._name_ == "Formula1":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.equipo))
+                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.equipo))
                 elif type(vehiculo)._name_ == "Camioneta":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.carga))
+                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.carga))
                 elif type(vehiculo)._name_ == "Motocicleta":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.tipo, vehiculo.velocidad, vehiculo.cilindrada))
+                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.tipo, vehiculo.velocidad, vehiculo.cilindrada))
                 elif type(vehiculo)._name_ == "Quad":
-                    writer.writerow((type(vehiculo)._name_, vehiculo.id, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.tipo, vehiculo.modelo, vehiculo.carga))
+                    writer.writerow((type(vehiculo)._name_, vehiculo.num_bastidor, vehiculo.color, vehiculo.ruedas, vehiculo.velocidad, vehiculo.cilindrada, vehiculo.tipo, vehiculo.modelo, vehiculo.carga))
