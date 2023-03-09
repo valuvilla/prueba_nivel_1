@@ -32,10 +32,10 @@ def iniciar():
             
         elif opcion == "2":
             print(Back.CYAN+Fore.WHITE+"Buscar vehículo")
-            nu = None
+            num_bastidor = None
             while True:
                 num_bastidor = helpers.leer_texto(3, 3, "num_bastidor (2 int y 1 char)").upper()
-                if re.match('[0-9]{2}[A-Z]$', num_bastidor):
+                if helpers.num_bastidor_valido(num_bastidor, db.Vehiculos.lista):
                     break
             vehiculo = db.Vehiculos.buscar(num_bastidor)
             print(vehiculo) if vehiculo else print(Fore.RED+f"Cliente de num_bastidor: {num_bastidor} no encontrado.")
@@ -68,7 +68,7 @@ def iniciar():
                     break
             
             color= helpers.leer_texto(2, 30, "Color (de 2 a 30 chars)").capitalize()
-            ruedas = helpers.validar_ruedas(2, 4, "Ruedas (de 2 o 4)")
+            ruedas = helpers.validar_ruedas("Ruedas (de 2 o 4)")
 
             if opcion == "1":
                 print(Back.LIGHTGREEN_EX+"Añadiendo un coche...\n")
@@ -78,4 +78,10 @@ def iniciar():
 
             
         
-        
+        elif opcion == '6':
+            print(Back.MAGENTA+"SALIENDO\n")
+            break
+
+        input("\nPresiona ENTER para continuar...")
+
+iniciar()

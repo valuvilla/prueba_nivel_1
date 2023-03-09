@@ -9,22 +9,16 @@ def limpiar_pantalla() -> None:
     os.system('cls') if platform.system() == "Windows" else os.system('clear')
 
 
-def validar_entero(mensaje: str) -> int:
+def leer_numero(min=0, max=100, mensaje=None):
+    print(mensaje) if mensaje else None
     while True:
         try:
-            numero = int(input(mensaje))
-            return numero
+            numero = input("> ")
+            if int(numero) >= min and int(numero) <= max:
+                return numero
         except ValueError:
-            print("Error, debe ingresar un número entero")
+            pass
 
-
-def validar_texto(mensaje: str) -> str:
-    while True:
-        texto = input(mensaje)
-        if re.match("^[a-zA-Z ]+$", texto):
-            return texto
-        else:
-            print("Error, debe ingresar un texto válido")
 
 def leer_texto(longitud_min=0, longitud_max=100, mensaje=None):
     print(mensaje) if mensaje else None
@@ -52,7 +46,7 @@ def validar_ruedas(mensaje: str) -> int:
     while True:
         try:
             numero = int(input(mensaje))
-            if numero == 2 or numero == 4:
+            if numero != 2 or numero != 4:
                 print("Error, debe ingresar un número entero entre 2 y 4")
             else:
                 return numero
