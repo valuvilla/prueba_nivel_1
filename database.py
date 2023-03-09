@@ -109,7 +109,7 @@ class Vehiculos:
             vehiculo = Camioneta(*args)
         elif opcion == "5":
             vehiculo = Motocicleta(*args)
-        else:
+        elif opcion == "6":
             vehiculo = Quad(*args)
         Vehiculos.lista.append(vehiculo)
         Vehiculos.guardar()
